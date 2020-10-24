@@ -29,7 +29,7 @@ const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
 app.get("/", (req, res) => {
   uid = req.query.id;
   channelName = req.query.channel;
-  const tokenA = RtcTokenBuilder.buildTokenWithUid(
+  const tokenB = RtcTokenBuilder.buildTokenWithAccount(
     appID,
     appCertificate,
     channelName,
@@ -37,6 +37,14 @@ app.get("/", (req, res) => {
     role,
     privilegeExpiredTs
   );
+  // const tokenA = RtcTokenBuilder.buildTokenWithUid(
+  //   appID,
+  //   appCertificate,
+  //   channelName,
+  //   uid,
+  //   role,
+  //   privilegeExpiredTs
+  // );
   res.status(200).send(tokenA);
 });
 
@@ -45,5 +53,5 @@ app.get("/", (req, res) => {
 // Build token with uid
 
 // Build token with user account
-//const tokenB = RtcTokenBuilder.buildTokenWithAccount(appID, appCertificate, channelName, account, role, privilegeExpiredTs);
+
 //console.log("Token With UserAccount: " + tokenB);
