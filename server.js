@@ -45,7 +45,7 @@ app.get("/", (req, res) => {
   //   role,
   //   privilegeExpiredTs
   // );
-  res.status(200).send(tokenA);
+  res.status(200).send(tokenB);
 });
 
 // IMPORTANT! Build token with either the uid or with the user account. Comment out the option you do not want to use below.
