@@ -17,11 +17,13 @@ app.listen(process.env.PORT || 3000, function () {
 });
 
 app.get("/token", (req, res) => {
-  res.send(req.query);
+  console.log(req);
+  res.send("DOne");
 });
 
 app.get("/", (req, res) => {
-  var authCode = "ZgrWVmmnC7_8z1vP2MIRQiMmLz8qSCV4g";
+  //var authCode = "ZgrWVmmnC7_8z1vP2MIRQiMmLz8qSCV4g";
+  var authCode = req.query.code;
   var auth =
     "Basic " +
     new buffer.from(
