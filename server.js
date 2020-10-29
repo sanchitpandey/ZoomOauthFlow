@@ -39,7 +39,7 @@ app.get("/token", (req, res) => {
       console.log("Access Token:", json.access_token);
     }
   );
-  res.send("Done");
+  res.status(200).send("Done");
 });
 
 app.get("/", (req, res) => {
