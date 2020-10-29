@@ -2,11 +2,9 @@ console.log("Hello!");
 
 const express = require("express");
 const bodyParser = require("body-parser");
-const axios = require("axios");
 const request = require("request");
 const app = express();
 const tokenUrl = "https://zoom.us/oauth/token/?";
-const qs = require("qs");
 var buffer = require("buffer").Buffer;
 
 app.set("view engine", "ejs");
@@ -34,17 +32,17 @@ app.get("/token", (req, res) => {
           Authorization: auth,
         },
       },
-      function (err, res) {
-        console.log(res);
-        var json = JSON.parse(res.body);
-        console.log("Access Token:", json.access_token);
+      function (err, response) {
+        if (err) res.send("Error");
+        console.log(response);
+        var json = JSON.parse(response.body);
+        //console.log("Access Token:", json.access_token);
+        res.status(200).send(json.access_token);
       }
     );
   } else {
     console.log("2nd round");
   }
-
-  res.status(200).send("Done");
 });
 
 app.get("/", (req, res) => {
