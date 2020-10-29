@@ -17,28 +17,33 @@ app.listen(process.env.PORT || 3000, function () {
 });
 
 app.get("/token", (req, res) => {
-  var authCode = req.query.code;
-  var auth =
-    "Basic " +
-    new buffer.from(
-      "ZfyVB0fURFCcMywvpQOjxA:PwqfT0bKdzOmuPehmWCbM7R7fi8SR7te"
-    ).toString("base64");
-  request.post(
-    {
-      url:
-        tokenUrl +
-        `grant_type=authorization_code&code=${authCode}&redirect_uri=http://fathomless-sands-96704.herokuapp.com`,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth,
+  if (req.query.code != null) {
+    var authCode = req.query.code;
+    var auth =
+      "Basic " +
+      new buffer.from(
+        "ZfyVB0fURFCcMywvpQOjxA:PwqfT0bKdzOmuPehmWCbM7R7fi8SR7te"
+      ).toString("base64");
+    request.post(
+      {
+        url:
+          tokenUrl +
+          `grant_type=authorization_code&code=${authCode}&redirect_uri=http://fathomless-sands-96704.herokuapp.com/token`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth,
+        },
       },
-    },
-    function (err, res) {
-      console.log(res);
-      var json = JSON.parse(res.body);
-      console.log("Access Token:", json.access_token);
-    }
-  );
+      function (err, res) {
+        console.log(res);
+        var json = JSON.parse(res.body);
+        console.log("Access Token:", json.access_token);
+      }
+    );
+  } else {
+    console.log("2nd round");
+  }
+
   res.status(200).send("Done");
 });
 
