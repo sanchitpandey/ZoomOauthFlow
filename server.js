@@ -18,7 +18,7 @@ app.listen(process.env.PORT || 3000, function () {
 
 app.get("/token", (req, res) => {
   console.log(req);
-  res.send("DOne");
+  res.send("Done");
 });
 
 app.get("/", (req, res) => {
@@ -33,7 +33,7 @@ app.get("/", (req, res) => {
     {
       url:
         tokenUrl +
-        `grant_type=authorization_code&code=${authCode}&redirect_uri=https://8c5e0b2b86a0.ngrok.io/token`,
+        `grant_type=authorization_code&code=${authCode}&redirect_uri=http://fathomless-sands-96704.herokuapp.com/token`,
       headers: {
         "Content-Type": "application/json",
         Authorization: auth,
